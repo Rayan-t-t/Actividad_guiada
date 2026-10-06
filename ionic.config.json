@@ -1,0 +1,7 @@
+{
+  "name": "DAMActividadGuiada",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
