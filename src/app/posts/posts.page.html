@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/inicio"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Posts</ion-title>
+    <ion-buttons slot="end">
+      <ion-button
+        fill="clear"
+        [attr.aria-label]="theme.isDarkMode() ? 'Activar modo claro' : 'Activar modo oscuro'"
+        (click)="theme.toggle()">
+        {{ theme.isDarkMode() ? 'Modo claro' : 'Modo oscuro' }}
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <section class="posts-heading">
+    <div>
+      <p class="eyebrow">COMUNIDAD</p>
+      <h1>Posts</h1>
+      <p class="posts-intro">Ideas, historias y conversaciones de la comunidad.</p>
+    </div>
+  </section>
+
+  @if (loading) {
+    <div class="state-message" role="status">
+      <p>Cargando posts...</p>
+    </div>
+  }
+
+  @if (error) {
+    <div class="state-message error-message" role="alert">
+      <strong>No se han podido cargar los posts</strong>
+      <p>{{ error }}</p>
+    </div>
+  }
+
+  @if (!loading && !error) {
+    <div class="posts-summary">
+      <span>Explora las publicaciones</span>
+      <span class="posts-count">{{ posts.length }} posts</span>
+    </div>
+
+    <div class="posts-list">
+      @for (post of posts; track post.id) {
+        <article class="post-card">
+          <div class="post-meta">
+            <span class="post-avatar" aria-hidden="true">{{ post.userId }}</span>
+            <div>
+              <strong>Usuario {{ post.userId }}</strong>
+              <span class="post-id">Publicación #{{ post.id }}</span>
+            </div>
+          </div>
+          <h2>{{ post.title }}</h2>
+          <p class="post-body">{{ post.body }}</p>
+        </article>
+      }
+    </div>
+  }
+</ion-content>

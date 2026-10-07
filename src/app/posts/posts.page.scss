@@ -1,0 +1,118 @@
+.posts-heading {
+  padding: 1.5rem 0 1.25rem;
+}
+
+.eyebrow {
+  margin: 0 0 0.4rem;
+  color: var(--ion-color-primary);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.posts-heading h1 {
+  margin: 0;
+  font-size: clamp(2rem, 6vw, 3rem);
+  font-weight: 750;
+  letter-spacing: -0.04em;
+}
+
+.posts-intro {
+  margin: 0.6rem 0 0;
+  color: var(--ion-color-medium);
+}
+
+.posts-summary {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 0.5rem 0 1rem;
+  color: var(--ion-color-medium);
+  font-size: 0.9rem;
+}
+
+.posts-count {
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  background: var(--ion-color-primary-tint);
+  color: var(--ion-color-primary-contrast);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.posts-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 290px), 1fr));
+  gap: 1rem;
+}
+
+.post-card {
+  padding: 1.25rem;
+  border: 1px solid var(--ion-color-step-150, #e2e5e9);
+  border-left: 4px solid var(--ion-color-primary);
+  border-radius: 1rem;
+  background: var(--ion-card-background, var(--ion-background-color));
+  box-shadow: 0 6px 20px rgb(0 0 0 / 5%);
+}
+
+.post-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.post-avatar {
+  display: grid;
+  width: 2.5rem;
+  height: 2.5rem;
+  flex: 0 0 2.5rem;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--ion-color-primary);
+  color: var(--ion-color-primary-contrast);
+  font-weight: 700;
+}
+
+.post-meta strong,
+.post-id {
+  display: block;
+}
+
+.post-meta strong {
+  font-size: 0.9rem;
+}
+
+.post-id {
+  margin: 0.15rem 0 0;
+  color: var(--ion-color-medium);
+  font-size: 0.78rem;
+}
+
+.post-card h2 {
+  margin: 1.1rem 0 0.55rem;
+  font-size: 1.1rem;
+  line-height: 1.4;
+  text-transform: capitalize;
+}
+
+.post-body {
+  margin: 0;
+  color: var(--ion-color-medium-shade);
+  line-height: 1.65;
+}
+
+.state-message {
+  padding: 1.5rem;
+  border-radius: 1rem;
+  color: var(--ion-color-medium);
+  text-align: center;
+}
+
+.state-message p {
+  margin: 0;
+}
+
+.error-message {
+  border: 1px solid var(--ion-color-danger);
+  color: var(--ion-color-danger);
+}
