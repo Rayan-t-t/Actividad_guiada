@@ -1,0 +1,80 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/inicio">
+      </ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Productos
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button
+        fill="clear"
+        [attr.aria-label]="theme.isDarkMode() ? 'Activar modo claro' : 'Activar modo oscuro'"
+        (click)="theme.toggle()">
+        {{ theme.isDarkMode() ? 'Modo claro' : 'Modo oscuro' }}
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <h1>Listado de productos</h1>
+  @if (loading) {
+  <div class="loading">
+    <ion-spinner></ion-spinner>
+    <p>
+      Cargando productos...
+    </p>
+  </div>
+  }
+  @if (error) {
+  <ion-card><ion-card-header>
+      <ion-card-title>
+        Error
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>
+        {{ error }}
+      </p>
+      <ion-button (click)="loadProducts()">
+        Reintentar
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+  }
+  @if (!loading && !error) {
+  <p>
+    Productos cargados:
+    <strong>{{ products.length }}</strong>
+  </p>
+  <div class="products-grid">
+    @for (product of products; track product.id) {
+    <ion-card class="product-card">
+      <img class="product-image" [src]="product.thumbnail" [alt]="product.title">
+      <ion-card-header>
+        <ion-card-title>{{ product.title }}</ion-card-title>
+        <p class="product-category">{{ product.category }}</p>
+      </ion-card-header>
+      <ion-card-content>
+        <dl class="product-details">
+          <div>
+            <dt>Marca</dt>
+            <dd>{{ product.brand || 'Sin marca' }}</dd>
+          </div>
+          <div>
+            <dt>Valoración</dt>
+            <dd>⭐ {{ product.rating }}</dd>
+          </div>
+          <div>
+            <dt>Stock</dt>
+            <dd>{{ product.stock }} unidades</dd>
+          </div>
+        </dl>
+        <p class="product-price">{{ product.price | currency:'EUR' }}</p>
+      </ion-card-content>
+    </ion-card>
+    }
+  </div>
+  }
+</ion-content>
