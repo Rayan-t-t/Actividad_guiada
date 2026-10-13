@@ -45,8 +45,9 @@
   }
   @if (!loading && !error) {
   <p>
-    Productos cargados:
-    <strong>{{ products.length }}</strong>
+    Mostrando
+    <strong>{{ products.length ? (currentPage - 1) * pageSize + 1 : 0 }}–{{ (currentPage - 1) * pageSize + products.length }}</strong>
+    de <strong>{{ total }}</strong> productos
   </p>
   <div class="products-grid">
     @for (product of products; track product.id) {
@@ -76,5 +77,22 @@
     </ion-card>
     }
   </div>
+  @if (totalPages > 1) {
+  <nav class="pagination" aria-label="Paginación de productos">
+    <ion-button
+      fill="outline"
+      [disabled]="currentPage === 1 || loading"
+      (click)="goToPreviousPage()">
+      Anterior
+    </ion-button>
+    <span aria-live="polite">Página {{ currentPage }} de {{ totalPages }}</span>
+    <ion-button
+      fill="outline"
+      [disabled]="currentPage >= totalPages || loading"
+      (click)="goToNextPage()">
+      Siguiente
+    </ion-button>
+  </nav>
+  }
   }
 </ion-content>

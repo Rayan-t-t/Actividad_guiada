@@ -10,7 +10,9 @@ export class ProductService {
   private http = inject(HttpClient);
   private apiUrl = 'https://dummyjson.com/products';
 
-  getProducts(): Observable<ProductsResponse> {
-    return this.http.get<ProductsResponse>(this.apiUrl);
+  getProducts(limit: number, skip: number): Observable<ProductsResponse> {
+    return this.http.get<ProductsResponse>(this.apiUrl, {
+      params: { limit, skip },
+    });
   }
 }

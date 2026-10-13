@@ -47,19 +47,28 @@ export class ProductosPage implements OnInit {
   readonly theme = inject(ThemeService);
   products: Product[] = [];
   total = 0;
+  readonly pageSize = 12;
+  currentPage = 1;
   loading = false;
   error = '';
+
+  get totalPages(): number {
+    return Math.ceil(this.total / this.pageSize);
+  }
+
   ngOnInit(): void {
     this.loadProducts();
   }
-  loadProducts(): void {
+
+  loadProducts(page = this.currentPage): void {
     this.loading = true;
     this.error = '';
-    this.productService.getProducts()
+    this.productService.getProducts(this.pageSize, (page - 1) * this.pageSize)
       .subscribe({
         next: (response: ProductsResponse) => {
           this.products = response.products;
           this.total = response.total;
+          this.currentPage = page;
           this.loading = false;
           this.changeDetector.markForCheck();
         },
@@ -71,5 +80,17 @@ export class ProductosPage implements OnInit {
           this.changeDetector.markForCheck();
         }
       });
+  }
+
+  goToPreviousPage(): void {
+    if (this.currentPage > 1 && !this.loading) {
+      this.loadProducts(this.currentPage - 1);
+    }
+  }
+
+  goToNextPage(): void {
+    if (this.currentPage < this.totalPages && !this.loading) {
+      this.loadProducts(this.currentPage + 1);
+    }
   }
 }
