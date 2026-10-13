@@ -7,6 +7,12 @@
     <ion-buttons slot="end">
       <ion-button
         fill="clear"
+        aria-label="Cambiar gama de color"
+        (click)="theme.nextColorPalette()">
+        Color: {{ theme.paletteName() }}
+      </ion-button>
+      <ion-button
+        fill="clear"
         [attr.aria-label]="theme.isDarkMode() ? 'Activar modo claro' : 'Activar modo oscuro'"
         (click)="theme.toggle()">
         {{ theme.isDarkMode() ? 'Modo claro' : 'Modo oscuro' }}

@@ -34,3 +34,51 @@
 
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 @import "@ionic/angular/css/palettes/dark.class.css";
+
+html.palette-azul,
+ion-app.palette-azul {
+  --ion-color-primary: #3880ff;
+  --ion-color-primary-rgb: 56, 128, 255;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #3171e0;
+  --ion-color-primary-tint: #4c8dff;
+  --ion-color-secondary: #5260ff;
+  --ion-color-secondary-rgb: 82, 96, 255;
+  --ion-color-secondary-contrast: #ffffff;
+  --ion-color-secondary-contrast-rgb: 255, 255, 255;
+  --ion-color-secondary-shade: #4854e0;
+  --ion-color-secondary-tint: #6370ff;
+}
+
+html.palette-verde,
+ion-app.palette-verde {
+  --ion-color-primary: #198754;
+  --ion-color-primary-rgb: 25, 135, 84;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #16774a;
+  --ion-color-primary-tint: #309366;
+  --ion-color-secondary: #0f766e;
+  --ion-color-secondary-rgb: 15, 118, 110;
+  --ion-color-secondary-contrast: #ffffff;
+  --ion-color-secondary-contrast-rgb: 255, 255, 255;
+  --ion-color-secondary-shade: #0d685f;
+  --ion-color-secondary-tint: #27847b;
+}
+
+html.palette-morado,
+ion-app.palette-morado {
+  --ion-color-primary: #7044ff;
+  --ion-color-primary-rgb: 112, 68, 255;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #633ce0;
+  --ion-color-primary-tint: #7e57ff;
+  --ion-color-secondary: #9d4edd;
+  --ion-color-secondary-rgb: 157, 78, 221;
+  --ion-color-secondary-contrast: #ffffff;
+  --ion-color-secondary-contrast-rgb: 255, 255, 255;
+  --ion-color-secondary-shade: #8a45c2;
+  --ion-color-secondary-tint: #a760e0;
+}

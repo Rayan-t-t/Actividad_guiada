@@ -10,6 +10,12 @@
     <ion-buttons slot="end">
       <ion-button
         fill="clear"
+        aria-label="Cambiar gama de color"
+        (click)="theme.nextColorPalette()">
+        Color: {{ theme.paletteName() }}
+      </ion-button>
+      <ion-button
+        fill="clear"
         [attr.aria-label]="theme.isDarkMode() ? 'Activar modo claro' : 'Activar modo oscuro'"
         (click)="theme.toggle()">
         {{ theme.isDarkMode() ? 'Modo claro' : 'Modo oscuro' }}
@@ -19,7 +25,7 @@
 </ion-header>
 <ion-content class="ion-padding">
   <h1>Listado de productos</h1>
-  @if (loading) {
+  @if (loading()) {
   <div class="loading">
     <ion-spinner></ion-spinner>
     <p>
@@ -27,7 +33,7 @@
     </p>
   </div>
   }
-  @if (error) {
+  @if (error()) {
   <ion-card><ion-card-header>
       <ion-card-title>
         Error
@@ -35,7 +41,7 @@
     </ion-card-header>
     <ion-card-content>
       <p>
-        {{ error }}
+        {{ error() }}
       </p>
       <ion-button (click)="loadProducts()">
         Reintentar
@@ -43,14 +49,14 @@
     </ion-card-content>
   </ion-card>
   }
-  @if (!loading && !error) {
+  @if (!loading() && !error()) {
   <p>
     Mostrando
-    <strong>{{ products.length ? (currentPage - 1) * pageSize + 1 : 0 }}–{{ (currentPage - 1) * pageSize + products.length }}</strong>
-    de <strong>{{ total }}</strong> productos
+    <strong>{{ products().length ? (currentPage() - 1) * pageSize + 1 : 0 }}–{{ (currentPage() - 1) * pageSize + products().length }}</strong>
+    de <strong>{{ total() }}</strong> productos
   </p>
   <div class="products-grid">
-    @for (product of products; track product.id) {
+    @for (product of products(); track product.id) {
     <ion-card class="product-card">
       <img class="product-image" [src]="product.thumbnail" [alt]="product.title">
       <ion-card-header>
@@ -77,18 +83,18 @@
     </ion-card>
     }
   </div>
-  @if (totalPages > 1) {
+  @if (totalPages() > 1) {
   <nav class="pagination" aria-label="Paginación de productos">
     <ion-button
       fill="outline"
-      [disabled]="currentPage === 1 || loading"
+      [disabled]="currentPage() === 1 || loading()"
       (click)="goToPreviousPage()">
       Anterior
     </ion-button>
-    <span aria-live="polite">Página {{ currentPage }} de {{ totalPages }}</span>
+    <span aria-live="polite">Página {{ currentPage() }} de {{ totalPages() }}</span>
     <ion-button
       fill="outline"
-      [disabled]="currentPage >= totalPages || loading"
+      [disabled]="currentPage() >= totalPages() || loading()"
       (click)="goToNextPage()">
       Siguiente
     </ion-button>

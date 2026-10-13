@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, computed, inject, signal } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import {
   IonHeader,
@@ -43,54 +43,47 @@ import { ThemeService } from '../../services/theme.service';
 })
 export class ProductosPage implements OnInit {
   private productService = inject(ProductService);
-  private changeDetector = inject(ChangeDetectorRef);
   readonly theme = inject(ThemeService);
-  products: Product[] = [];
-  total = 0;
+  readonly products = signal<Product[]>([]);
+  readonly total = signal(0);
   readonly pageSize = 12;
-  currentPage = 1;
-  loading = false;
-  error = '';
-
-  get totalPages(): number {
-    return Math.ceil(this.total / this.pageSize);
-  }
+  readonly currentPage = signal(1);
+  readonly loading = signal(false);
+  readonly error = signal('');
+  readonly totalPages = computed(() => Math.ceil(this.total() / this.pageSize));
 
   ngOnInit(): void {
     this.loadProducts();
   }
 
-  loadProducts(page = this.currentPage): void {
-    this.loading = true;
-    this.error = '';
+  loadProducts(page = this.currentPage()): void {
+    this.loading.set(true);
+    this.error.set('');
     this.productService.getProducts(this.pageSize, (page - 1) * this.pageSize)
       .subscribe({
         next: (response: ProductsResponse) => {
-          this.products = response.products;
-          this.total = response.total;
-          this.currentPage = page;
-          this.loading = false;
-          this.changeDetector.markForCheck();
+          this.products.set(response.products);
+          this.total.set(response.total);
+          this.currentPage.set(page);
+          this.loading.set(false);
         },
         error: (error: HttpErrorResponse) => {
           console.error(error);
-          this.error =
-            'No se han podido cargar los productos.';
-          this.loading = false;
-          this.changeDetector.markForCheck();
+          this.error.set('No se han podido cargar los productos.');
+          this.loading.set(false);
         }
       });
   }
 
   goToPreviousPage(): void {
-    if (this.currentPage > 1 && !this.loading) {
-      this.loadProducts(this.currentPage - 1);
+    if (this.currentPage() > 1 && !this.loading()) {
+      this.loadProducts(this.currentPage() - 1);
     }
   }
 
   goToNextPage(): void {
-    if (this.currentPage < this.totalPages && !this.loading) {
-      this.loadProducts(this.currentPage + 1);
+    if (this.currentPage() < this.totalPages() && !this.loading()) {
+      this.loadProducts(this.currentPage() + 1);
     }
   }
 }
